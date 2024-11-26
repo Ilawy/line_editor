@@ -1,18 +1,11 @@
 
 typedef enum
 {
-    ArrowUp = -1,
-    ArrowDown = -2,
-    ArrowLeft = -3,
-    ArrowRight = -4,
-    Home = -5,
-    End = -6,
-    Escape = -7,
-    Enter = -8,
-    Backspace = -9,
-    Insert = -10,
-    AltBackSpace = -11,
-    Delete = -12,
+    
+
+    Enter = 10,
+
+    Escape = 27,
 
     // ASCII
     KeySpace = 32,
@@ -109,7 +102,21 @@ typedef enum
     KeyLeftCurlyBracket = 123,
     KeyPipe = 124,
     KeyRightCurlyBracket = 125,
-    KeyTilde = 126
+    KeyTilde = 126,
+    Backspace = 127,
+
+
+    //NON STANDARD
+    ArrowUp = 256,
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
+    Home,
+    End,
+    Insert,
+    AltBackSpace,
+    Delete,
+
 } KeyboardButton;
 
 KeyboardButton captureKeyboardInput();
@@ -124,7 +131,6 @@ KeyboardButton captureKeyboardInput();
 #define EXTEND_INSERT 50
 #define EXTEND_DELETE 51
 
-#define KEY_BACKSPACE 127
 #define KEY_ENTER 10
 #define KEY_Y 121
 KeyboardButton captureKeyboardInput()
@@ -132,8 +138,10 @@ KeyboardButton captureKeyboardInput()
     char first = getch();
     switch (first)
     {
-    case KEY_ENTER:
+    case Enter:
         return Enter;
+    case KeySpace ... KeyTilde:
+        return first;
     case KEY_ESC_OR_EXTENDED:
         if (kbhit() == 0)
             return Escape;
@@ -155,9 +163,11 @@ KeyboardButton captureKeyboardInput()
             case EXTEND_END:
                 return End;
             }
+        }else if(middle == Backspace){
+            return AltBackSpace;
         }
-
-    case KEY_BACKSPACE:
+        break;
+    case Backspace:
         return Backspace;
     }
 }

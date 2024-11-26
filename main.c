@@ -16,7 +16,8 @@ void injectAt(char array[], int size, int index, char value)
 {
     if (index < 0 || index > size)
     {
-        panic("Access out of bounds");
+        printf("Access out of bounds, trying to access index %d at size %d", index, size);
+        exit(3);
     }
     for (int i = size; i > index; i--)
     {
@@ -27,15 +28,16 @@ void injectAt(char array[], int size, int index, char value)
 
 void deleteAt(char array[], int size, int index)
 {
-    if (index < 0 || index >= size)
+    if (index < 0 || index > size)
     {
-        panic("Access out of bounds");
+        printf("Access out of bounds, trying to access index %d at size %d", index, size);
+        exit(3);
     }
     for (int i = index; i < size - 1; i++)
     {
         array[i] = array[i + 1];
     }
-    array[size - 1] = '\0';  // Zero out the last element
+    array[size - 1] = '\0';
 }
 
 int main()
@@ -50,11 +52,29 @@ int main()
     printf("%s", buffer);
     while (1)
     {
-        char input = captureKeyboardInput();
+        int input = captureKeyboardInput();
         switch (input)
         {
         case Insert:
             insertmode = !insertmode;
+            break;
+        case Home:
+            current = 0;
+            gotox(0);
+            break;
+        //TODO: handle word deletion
+        // case AltBackSpace:
+        //     while (buffer[current] != ' ' && len > 0 && current > 0)
+        //     {
+        //         printf("d(%d, %d)\n\n\n%s", buffer[current], current, buffer);
+        //         deleteAt(buffer, len, current);
+        //         current--;
+        //         len--;
+        //     }
+        //     break;
+        case End:
+            current = len;
+            gotox(current);
             break;
         case Backspace:
             if (current > 0 && len > 0)
@@ -66,7 +86,8 @@ int main()
                 printf("%s", buffer);
                 gotox(current + 1);
             }
-            if(current == 0 && insertmode && len){
+            if (current == 0 && insertmode && len)
+            {
                 deleteAt(buffer, len, 0);
                 len--;
                 system("clear");
@@ -132,7 +153,7 @@ int main()
                 {
                     if (len + 1 < MAX_LINE_LEN)
                     {
-                        injectAt(buffer, len, current, input);
+                        injectAt(buffer, len+1, current, input);
                         system("clear");
                         printf("%s", buffer);
                         current += 1;

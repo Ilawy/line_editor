@@ -169,10 +169,10 @@ int main()
             break;
         }
 
-        int lasty = wherey();
-        int lastx = wherex();
-        gotoxy(0, lasty + 1);
-        printf("[DEBUG]: current = %d, insert_mode = %d, len = %d                 ", current, insertmode, len);
-        gotoxy(lastx, lasty);
+        // int lasty = wherey();
+        // int lastx = wherex();
+        // gotoxy(0, lasty + 1);
+        // printf("[DEBUG]: current = %d, insert_mode = %d, len = %d                 ", current, insertmode, len);
+        // gotoxy(lastx, lasty);
     }
 }

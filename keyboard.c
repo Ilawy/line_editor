@@ -1,13 +1,12 @@
 
 typedef enum
 {
-    
 
     Enter = 10,
 
     Escape = 27,
 
-    // ASCII
+    /* ASCII */
     KeySpace = 32,
     KeyExclamation = 33,
     KeyDoubleQuote = 34,
@@ -105,8 +104,7 @@ typedef enum
     KeyTilde = 126,
     Backspace = 127,
 
-
-    //NON STANDARD
+    /* NON STANDARD */
     ArrowUp = 256,
     ArrowDown,
     ArrowLeft,
@@ -162,8 +160,13 @@ KeyboardButton captureKeyboardInput()
                 return Home;
             case EXTEND_END:
                 return End;
+            case EXTEND_INSERT:
+                getchar(); // ignore 126
+                return Insert;
             }
-        }else if(middle == Backspace){
+        }
+        else if (middle == Backspace)
+        {
             return AltBackSpace;
         }
         break;

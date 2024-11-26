@@ -1,4 +1,4 @@
-// https://github.com/casualsnek/linuxconio/tree/main
+/* https://github.com/casualsnek/linuxconio/tree/main */
 #ifndef CONIO_H
 #define CONIO_H
 
@@ -115,7 +115,7 @@ void showcursor()
 
 void textcolor(int newcolor)
 {
-    // https://en.wikipedia.org/wiki/ANSI_escape_code
+    /* https://en.wikipedia.org/wiki/ANSI_escape_code */
 
     const char *s = "\x1b[30m";
 
@@ -194,7 +194,7 @@ void textcolor(int newcolor)
     printf("%s", s);
 }
 
-// https://www.codeproject.com/Articles/5329247/How-to-Change-Text-Color-in-a-Linux-Terminal
+/* https://www.codeproject.com/Articles/5329247/How-to-Change-Text-Color-in-a-Linux-Terminal */
 void resetTextColor()
 {
     printf("\033[39m");
@@ -207,7 +207,7 @@ void resetBackgroundColor()
 
 void textbackground(int newcolor)
 {
-    // https://en.wikipedia.org/wiki/ANSI_escape_code
+    /* https://en.wikipedia.org/wiki/ANSI_escape_code */
 
     const char *s = "\x1b[40m";
 

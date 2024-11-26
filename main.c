@@ -2,6 +2,7 @@
 #include "conio.h"
 #include "keyboard.c"
 #include <sys/ioctl.h>
+#include "common.c"
 
 #define MAX_LINE_LEN 64
 
@@ -49,6 +50,7 @@ int main()
     int len = 0;
     int current = 0;
     char insertmode = 0;
+    setCursor(IBeam);
     printf("%s", buffer);
     while (1)
     {
@@ -57,21 +59,23 @@ int main()
         {
         case Insert:
             insertmode = !insertmode;
+            setCursor(insertmode ? Underline : IBeam);
             break;
         case Home:
             current = 0;
             gotox(0);
             break;
-        //TODO: handle word deletion
-        // case AltBackSpace:
-        //     while (buffer[current] != ' ' && len > 0 && current > 0)
-        //     {
-        //         printf("d(%d, %d)\n\n\n%s", buffer[current], current, buffer);
-        //         deleteAt(buffer, len, current);
-        //         current--;
-        //         len--;
-        //     }
-        //     break;
+        /*TODO: handle word deletion*/
+        /* case AltBackSpace:
+         *     while (buffer[current] != ' ' && len > 0 && current > 0)
+         *     {
+         *         printf("d(%d, %d)\n\n\n%s", buffer[current], current, buffer);
+         *         deleteAt(buffer, len, current);
+         *         current--;
+         *         len--;
+         *     }
+         *     break;
+         */
         case End:
             current = len;
             gotox(current);
@@ -114,33 +118,33 @@ int main()
             if (insertmode)
             {
                 if (current == len)
-                { // at end
+                { /*@end*/
                     if (len == MAX_LINE_LEN)
-                    { // max len
-                        // replace only
+                    { /* max len */
+                        /* replace only */
                         buffer[current] = input;
                         printf("%c", input);
                         gotox(wherex() - 1);
                     }
                     else
                     {
-                        buffer[current] = input; // replace
+                        buffer[current] = input; /* replace */
                         printf("%c", input);
-                        len++;     // expand
-                        current++; // increase
+                        len++;     /* expand */
+                        current++; /* increase */
                     }
                 }
                 else
-                {                            // not at the end
-                    buffer[current] = input; // replace
+                {                            /* not at the end */
+                    buffer[current] = input; /* replace */
                     printf("%c", input);
-                    current++; // increase
+                    current++; /* increase */
                 }
             }
             else
             {
                 if (current == len)
-                { //@end
+                { /*@end*/
                     if (len != MAX_LINE_LEN)
                     {
                         buffer[current] = input;
@@ -153,7 +157,7 @@ int main()
                 {
                     if (len + 1 < MAX_LINE_LEN)
                     {
-                        injectAt(buffer, len+1, current, input);
+                        injectAt(buffer, len + 1, current, input);
                         system("clear");
                         printf("%s", buffer);
                         current += 1;
@@ -166,13 +170,15 @@ int main()
         break;
 
         default:
+            // printf("BADACTx %d", input);
             break;
         }
 
-        // int lasty = wherey();
-        // int lastx = wherex();
-        // gotoxy(0, lasty + 1);
-        // printf("[DEBUG]: current = %d, insert_mode = %d, len = %d                 ", current, insertmode, len);
-        // gotoxy(lastx, lasty);
+        /* int lasty = wherey();
+         * int lastx = wherex();
+         * gotoxy(0, lasty + 1);
+         * printf("[DEBUG]: current = %d, insert_mode = %d, len = %d                 ", current, insertmode, len);
+         * gotoxy(lastx, lasty);
+         */
     }
 }

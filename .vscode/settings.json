@@ -2,6 +2,9 @@
     "files.associations": {
         "conio.h": "c",
         "ioctl.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "ioctl-types.h": "c",
+        "termios.h": "c",
+        "ioctls.h": "c"
     }
 }

@@ -84,6 +84,17 @@ int main()
             system("clear");
             printf("Your message: `%s`\n", buffer);
             exit(0);
+        //TODO: add delete function
+        // case Delete:
+        //     if(current < len && current >= 0 && len > 0){
+        //         deleteAt(buffer, len, current);
+        //         len--;
+        //         system("clear");
+        //         printf("%s", buffer);
+        //         gotox(current);
+        //     }
+        //     break;
+
         case Backspace:
             if (current > 0 && len > 0)
             {

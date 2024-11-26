@@ -163,6 +163,9 @@ KeyboardButton captureKeyboardInput()
             case EXTEND_INSERT:
                 getchar(); // ignore 126
                 return Insert;
+            case EXTEND_DELETE:
+                getchar(); // ignore 126
+                return Delete;
             }
         }
         else if (middle == Backspace)

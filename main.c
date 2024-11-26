@@ -1,8 +1,8 @@
 #include "stdio.h"
-#include "conio.h"
-#include "keyboard.c"
+#include "./lib/conio.h"
+#include "./lib/keyboard.c"
 #include <sys/ioctl.h>
-#include "common.c"
+#include "./lib/common.c"
 
 #define MAX_LINE_LEN 64
 
@@ -80,6 +80,10 @@ int main()
             current = len;
             gotox(current);
             break;
+        case Enter:
+            system("clear");
+            printf("Your message: `%s`\n", buffer);
+            exit(0);
         case Backspace:
             if (current > 0 && len > 0)
             {
